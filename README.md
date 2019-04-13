@@ -164,3 +164,118 @@ class Square():
     def _get_perimeter(self):
         return self.side * 4
 ```
+
+### True/false evaluation
+
+Use _implicit_ false evaluation.
+
+* `if foo` instead of `if foo != []`
+* If comparing to singletons (i. e. `None`), use `is` or `is not`
+* Never compare to `True` or `False`
+* Prefer `if seq` to `if len(seq)`
+
+### Decorators
+
+Use `functools.wraps` to decorate exposed functions to properly copy function attributes.
+
+**Bad:**
+```python
+def logit(f):
+    def wrapper(*args, **kwargs):
+        print(f'{f.__name__} called')
+        return f(*args, **kwargs)
+    return wrapper
+
+@logit
+def aplusb(a, b=1):
+    return a + b
+
+>>> aplusb(12)
+aplusb called
+13
+>>> aplusb.__name__
+'wrapper'
+```
+
+**Good:**
+```python
+from functools import wraps
+
+def logit(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        print(f'{f.__name__} called')
+        return f(*args, **kwargs)
+    return wrapper
+
+@logit
+def aplusb(a, b=1):
+    return a + b
+
+>>> aplusb(12)
+aplusb called
+13
+>>> aplusb.__name__
+'aplusb'
+```
+
+### File access
+
+Use the `with` statement, its more error-prone - closes files on exceptions for example.
+
+**Bad:**
+```python
+f = open('file.txt', 'r')
+data = f.read()
+print(data)
+f.close()
+```
+
+**Good:**
+```python
+with open('file.txt', 'r') as f:
+    data = f.read()
+    print(data)
+```
+
+### Trailing commas in sequences
+
+Use trailing commas if the items are in separate lines.
+
+**Example:**
+```python
+a = [1, 2, 3]  # no trailing comma
+b = {
+  "a": 1,
+  "b": 2,
+}
+```
+
+## Tools
+
+### Flake8
+
+Use [flake8](http://flake8.pycqa.org/) for following PEP-8 as much as possible. It can be integrated into most editors / IDEs.
+
+I prefer `max-line-lenght` to be 88 instead of 79. (This is the default value for `black` as well.)
+
+#### Configuration (~/.config/flake8)
+
+```
+[flake8]
+max-line-length = 88
+exclude = tests/*
+max-complexity = 20
+select = C,E,F,W,B,B950
+ignore = E501
+```
+
+### Black
+
+Use [black](https://github.com/ambv/black) to format your code before commiting it into a repository. It can be [integrated](https://black.readthedocs.io/en/stable/editor_integration.html) into most ediors / IDEs as well.
+
+## Framework preferences
+
+* [Django](https://www.djangoproject.com/) - for full featured webapps with admin interface, user management and ORM for _free_
+* [Flask](http://flask.pocoo.org/) - for lightweight webapps, APIs
+* [Quart](http://pgjones.gitlab.io/quart/) - async (ASGI) framework with an API compatible with Flask (python 3.7+) - http2 and websocket support
