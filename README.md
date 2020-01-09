@@ -274,6 +274,26 @@ ignore = E501
 
 Use [black](https://github.com/ambv/black) to format your code before commiting it into a repository. It can be [integrated](https://black.readthedocs.io/en/stable/editor_integration.html) into most ediors / IDEs as well.
 
+### pyenv
+
+To support multiple python versions, you can use [pyenv](https://github.com/pyenv/pyenv) to have multiple (and stable) versions installed. Using [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) it's easy to create virtualenvs based on a specific version of python.
+
+### pytest
+
+I like the simplicity of [pytest](http://pytest.org) tests. (w/ [pytest-cov](https://github.com/pytest-dev/pytest-cov)
+
+### tox
+
+[tox](https://tox.readthedocs.io/) can automatically create virtualenvs for the supported python versions and test your application in them.
+
+### Poetry
+
+[Poetry](https://python-poetry.org/) is (imho) currently the best dependency management + build + packageing tool for python.
+
+### mypy
+
+[mypy](http://mypy-lang.org/) is a static type checker for python [type hints](https://www.python.org/dev/peps/pep-0484/). Using it helps to prevent errors that are caused by the dynamic typing behaviour of python.
+
 ## Framework preferences
 
 * [Django](https://www.djangoproject.com/) - for full featured webapps with admin interface, user management and ORM for _free_
