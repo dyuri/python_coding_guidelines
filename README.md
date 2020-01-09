@@ -280,7 +280,7 @@ To support multiple python versions, you can use [pyenv](https://github.com/pyen
 
 ### pytest
 
-I like the simplicity of [pytest](http://pytest.org) tests. (w/ [pytest-cov](https://github.com/pytest-dev/pytest-cov)
+I like the simplicity of [pytest](http://pytest.org) tests. (w/ [pytest-cov](https://github.com/pytest-dev/pytest-cov) )
 
 ### tox
 
